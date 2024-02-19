@@ -1,9 +1,22 @@
-#List of useless Superheroes     
---   
-This list will have heroes on it that are considered useless or impractical on most ocassions or heroes that demonstrate as such during specific timelines/events the user has selected.     
-This will be based on the universe the user has selected, i.e marvel or DC, along with some specific timeline selection as well. 
+# List of Useless Superheroes
 
-For Example : Some of us would consider wanda to have been useless when she destroyed vision's mind stone as Thanos just reversed time to undo all her work. Her contribution towards the main goal towards stopping Thanos was barely nothing at all. 
+---
 
-- ###User will have the option to select a few categories or a specific timeline in the marvel or DC universe** 
-- ###Based on user selection the list will wary depending upon the action taken by the superhero during that timeline**
+Welcome to the curated collection of superheroes who, in certain timelines or specific events, demonstrated a level of impracticality or perceived uselessness. The superheroes included in this list may have faced challenges where their contributions were notably limited, showcasing the diversity of their experiences within the chosen universe—be it Marvel or DC.
+
+## User Customization
+
+### Marvel or DC Universe
+Choose your preferred universe and dive into the moments where superheroes faced unique challenges, allowing us to reevaluate their effectiveness.
+
+### Timeline Selection
+Explore specific timelines or events to witness superheroes in action during critical moments. From unexpected setbacks to instances where their powers seemed less impactful, this list captures the essence of their struggles.
+
+## Example Scenario
+
+### Scarlet Witch's Quandary
+In certain timelines, like the one where Wanda Maximoff attempted to destroy Vision's mind stone, her efforts proved to be in vain as Thanos effortlessly reversed time, undoing her work. This instance led to contemplation about the effectiveness of her actions, especially considering the minimal impact on the overarching goal of stopping Thanos.
+
+---
+
+Author : Anshul.K
