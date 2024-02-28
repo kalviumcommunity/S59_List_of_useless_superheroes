@@ -1,0 +1,2 @@
+const heroCard =  './../models/characterCard'
+
