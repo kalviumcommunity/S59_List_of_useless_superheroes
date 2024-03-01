@@ -6,9 +6,9 @@ import Loader from './../components/Loader';
 function View({stack}) {
   const [heroes, setHeroes] = useState([]);
   const [loading, setLoading] = useState(true);
-
+// https://serverk.onrender.com/api
   useEffect(() => {
-    fetch(`http://localhost:5000/api/${stack.code}`)
+    fetch(`https://serverk.onrender.com/api/${stack.code}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
