@@ -3,16 +3,14 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema 
 
-const testScheme = new Schema({
-
-    "ID" : {
-        type : Number
-    },
-
+const cardSchema = new Schema({
     'Hero Name': {
         type: String,
         required: true,
       },
+      'Image' : {
+        type: String,
+    },
       'Real Name': {
         type: String,
       },
@@ -36,6 +34,6 @@ const testScheme = new Schema({
       }
 })
 
-const card = mongoose.model('card', testScheme)
+const dc = mongoose.model('dc_heroes', cardSchema)
 
-module.exports = card
+module.exports = dc

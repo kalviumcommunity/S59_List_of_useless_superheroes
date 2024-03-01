@@ -3,7 +3,16 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema 
 
-const cardSchema = new Schema({
+const testScheme = new Schema({
+
+    "ID" : {
+        type : Number
+    },
+    
+    'Image' : {
+        type: String,
+    },
+
     'Hero Name': {
         type: String,
         required: true,
@@ -31,6 +40,6 @@ const cardSchema = new Schema({
       }
 })
 
-const comic = mongoose.model('comic', cardSchema)
+const marvel = mongoose.model('marvel_heroes', testScheme)
 
-module.exports = comic
+module.exports = marvel
