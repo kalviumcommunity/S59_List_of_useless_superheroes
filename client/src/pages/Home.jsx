@@ -34,11 +34,6 @@ function Home() {
       
       <div className="relative w-full bg-black" style={{ height: 'fit', overflow: 'hidden' }}>
         <Banner />
-        <div className={`absolute ${blurBack && "backdrop-blur-sm"} transition-opacity h-full w-full justify-center items-center z-10 top-1/2 left-1/2 opacity-${showCards ? "100" : "0"} transition-all duration-1000 transform -translate-x-1/2 -translate-y-1/2 flex space-x-32`}>
-          <Link to={"/marvel"}><Card imageUrl="Marvel.webp" heroText="Marvel Universe" /></Link>
-          <Link to={"/comics"}><Card imageUrl="comics.webp" heroText="Comic Characters" /></Link>
-          <Link to={"/dc"}><Card imageUrl="dc.jpg" heroText="DC Universe" /></Link>
-        </div>
       </div>
       
     </div>
