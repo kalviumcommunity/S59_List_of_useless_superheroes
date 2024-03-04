@@ -11,6 +11,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dc" element={<View stack={{code : 'dc'}} />} />
+        <Route path="/marvel" element={<View  stack={{code : 'marvel'}}/>} />
+        <Route path="/comics" element={<View  stack={{code : 'comics'}}/>} />
       </Routes>
       <Footer />
     </Router>
