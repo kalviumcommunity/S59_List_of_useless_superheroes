@@ -8,7 +8,7 @@ function View({stack}) {
   const [loading, setLoading] = useState(true);
 // https://serverk.onrender.com/api
   useEffect(() => {
-    fetch(`https://serverk.onrender.com/api/${stack.code}`)
+    fetch(`https://localhost:3000/api/${stack.code}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
