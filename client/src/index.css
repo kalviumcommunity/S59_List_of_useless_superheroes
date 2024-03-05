@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background-color: gray;
+}
+
 .bg-glass {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
@@ -43,3 +47,5 @@
       left: unset;
     }
   }
+
+  

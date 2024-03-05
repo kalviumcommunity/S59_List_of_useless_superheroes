@@ -3,7 +3,7 @@ import React from 'react';
 
 const Card = ({ imageUrl, heroText }) => {
   return (
-        <div className="relative transition-all duration-1000 overflow-hidden w-96 h-96 hover:cursor-pointer">
+        <div className="relative transition-all rounded-lg duration-1000 overflow-hidden w-96 h-96 hover:cursor-pointer">
       {/* Image */}
       <img
         src={imageUrl}
