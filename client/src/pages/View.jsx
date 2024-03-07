@@ -9,8 +9,9 @@ function View({stack}) {
   const [heroes, setHeroes] = useState([]);
   const [loading, setLoading] = useState(true);
 // https://serverk.onrender.com/api
+// http://localhost:5000/api/
   useEffect(() => {
-    fetch(`https://serverk.onrender.com/api/${stack.code}`)
+    fetch(`http://localhost:5000/api/${stack.code}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -18,6 +19,10 @@ function View({stack}) {
         setHeroes(data);
       })
       .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
   
 
