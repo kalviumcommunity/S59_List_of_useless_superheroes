@@ -148,7 +148,7 @@ const updatePost = async (updatedPost) => {
               >
                 {visibleBodies[post._id] ? 'Hide Body' : 'Show Body'}
               </button>
-              {/* <button
+              <button
                 className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 mx-2 rounded mt-2"
                 onClick={() => {
                   setEditingPost(true)
@@ -163,7 +163,7 @@ const updatePost = async (updatedPost) => {
                 onClick={() => deletePost(post._id)}
               >
                 Delete Post
-              </button> */}
+              </button>
               {visibleBodies[post._id] && post.body.map((section) => (
                 <div key={section.subtitle} className='mt-2'>
                   <h4 className='text-lg font-semibold text-white'>{section.subtitle}</h4>
@@ -180,6 +180,7 @@ const updatePost = async (updatedPost) => {
         onClick={() => {
           setEditingPost(false)
           setIsModalOpen(true)
+          setPostToEdit(null)
         }}
       >
         Add Post
