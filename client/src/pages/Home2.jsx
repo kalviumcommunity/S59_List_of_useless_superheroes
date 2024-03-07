@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import HeroSlider, { Slide, Nav, SideNav,Overlay, MenuNav,  AutoplayButton } from "hero-slider";
 import Card from '../components/Card';
 import Header from './../components/Header'
-
+import { useEffect } from "react";
 
 const imgArr = [
+  'https://images7.alphacoders.com/808/808611.jpg',
+  'https://images3.alphacoders.com/666/666317.jpg',
+  'https://i.imgur.com/tEvSreU.jpeg',
   'https://i.imgur.com/GmjBjs3.jpeg',
   'https://i.imgur.com/lHyQSdb.jpeg',
   'https://i.imgur.com/KSrsFEz.jpeg',
@@ -14,6 +17,9 @@ const imgArr = [
 ]
 
 const Home2 = () => {
+
+  
+
   return (
     <>
     <Header />
@@ -42,7 +48,7 @@ const Home2 = () => {
     >
 
     <Overlay>
-        <div className="flex flex-col items-center justify-center h-full  text-white">
+        <div className="flex flex-col items-center justify-center h-full bg-gradient-to-b from-transparent to-black text-white">
           <h1 className="text-6xl w-4/5 text-center font-bold mb-4">Heroic Missteps: Unveiling Superheroes' Least Heroic Moments</h1>
           <h2 className="text-3xl w-4/5 text-center font-medium mb-2">Exploring the Awkward, Useless, and Detrimental Side of Superheroism</h2>
           <p className="text-2xl w-4/5 text-center mt-10">Dive into the extraordinary world of superheroes through 'Hero Rank,' where we shed light on those moments when even the mightiest heroes had their fair share of missteps. From comically useless scenes to unintended consequences, join us on a journey of laughter, reflection, and a fresh perspective on the lighter side of heroism. Because even the most powerful beings have their off days!</p>
