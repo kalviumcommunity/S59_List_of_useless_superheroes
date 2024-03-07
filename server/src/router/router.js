@@ -5,6 +5,7 @@ const {connectToDB, isConnected} = require('../controllers/db')
 const marvel =  require('../models/marvel')
 const comic = require('../models/comic')
 const dc = require('./../models/dc')
+const post = require('./../models/posts')
 connectToDB()
 
 // router.get('/c', async(req, res) => {
@@ -37,6 +38,34 @@ router.get('/dc', async(req, res) => {
     const data = await dc.find()
     res.send(data)
 }); 
+
+// get for posts
+router.get('/posts', async(req, res) => {
+    const data = await post.find()
+    res.send(data)
+}); 
+
+router.post('/posts', async (req, res) => {
+    try {
+        const newPost = new post(req.body);
+        const savedPost = await newPost.save();
+        res.status(201).json(savedPost);
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to add data', "req.body" : req.body });
+    }
+});
+
+router.delete('/posts/:id', async (req, res) => {
+    try {
+        const deletedPost = await post.findByIdAndDelete(req.params.id);
+        if (!deletedPost) {
+            return res.status(404).json({ error: 'Data not found' });
+        }
+        res.status(200).json({ message: 'Data deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 
 
