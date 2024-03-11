@@ -55,6 +55,58 @@ router.post('/posts', async (req, res) => {
     }
 });
 
+// comments
+router.post('/posts/:id/comments', async (req, res) => {
+    try {
+      const postId = req.params.id;
+      const { text } = req.body;
+  
+      const existingPost = await post.findById(postId);
+  
+      if (!existingPost) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+
+      existingPost.comments.push({ text, createdAt: Date.now() });
+  
+      const updatedPost = await existingPost.save();
+  
+      res.status(201).json(updatedPost);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+//   Comments Delete => 
+router.delete('/posts/:postId/comments/:commentId', async (req, res) => {
+    try {
+      const postId = req.params.postId;
+      const commentId = req.params.commentId;
+  
+      const existingPost = await post.findById(postId);
+  
+      if (!existingPost) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+
+      const commentIndex = existingPost.comments.findIndex(comment => comment._id.toString() === commentId);
+  
+      if (commentIndex === -1) {
+        return res.status(404).json({ error: 'Comment not found' });
+      }
+  
+      existingPost.comments.splice(commentIndex, 1);
+  
+      const updatedPost = await existingPost.save();
+  
+      res.status(200).json(updatedPost);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
 router.delete('/posts/:id', async (req, res) => {
     try {
         const deletedPost = await post.findByIdAndDelete(req.params.id);

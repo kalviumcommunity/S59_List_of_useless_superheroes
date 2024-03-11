@@ -15,6 +15,12 @@ const superheroSchema = new mongoose.Schema({
       point: { type: String, required: true },
     },
   ],
+  comments: [
+    {
+      text: { type: String, required: true },
+      createdAt: { type: Date, default: Date.now },
+    },
+  ],
 });
 
 const post = mongoose.model("blogposts", superheroSchema);
