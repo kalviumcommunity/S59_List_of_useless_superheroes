@@ -36,7 +36,7 @@ function Blog() {
       });
       setVisibleBodies(initialVisibleBodies);
       setPosts(data);
-      toast.success('Data fetched successfully!');
+      // toast.success('Data fetched successfully!');
     } catch (error) {
       console.error('Error fetching data:', error);
       toast.error('Error fetching data. Please try again later.');
@@ -63,117 +63,123 @@ function Blog() {
   };
 
   const addPost = async (newPost) => {
-    toast.info("Adding Post.....")
-    try {
-      const response = await fetch(API_URI, {
+  try {
+    await toast.promise(
+      fetch(API_URI, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newPost),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add a new post');
+      }),
+      {
+        loading: 'Adding Post...',
+        success: 'Post added successfully!',
+        error: 'Failed to add a new post. Please try again later.',
       }
+    );
 
-      const updatedPosts = await response.json();
-      setIsModalOpen(false);
-      toast.success('Post added successfully!');
-      refresh();
-    } catch (error) {
-      console.error('Error adding a new post:', error);
-      toast.error('Error adding a new post. Please try again later.');
-    }
-  };
-
-  const deletePost = async (id) => {
-    try {
-      const response = await fetch(`${API_URI}/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to delete the post');
-      }
-
-      const updatedPosts = posts.filter((post) => post._id !== id);
-      setPosts(updatedPosts);
-      toast.error('Post deleted successfully!');
-    } catch (error) {
-      console.error('Error deleting a post:', error);
-      toast.error('Error deleting a post. Please try again later.');
-    }
-  };
-  // Inside your Blog component
-const updatePost = async (updatedPost) => {
-  console.log(updatedPost);
-  try {
-    const response = await fetch(`${API_URI}/${updatedPost._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedPost),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to update the post');
-    }
-
-    const updatedPosts = await response.json();
-    setEditingPost(null); // Reset the editing post state
     setIsModalOpen(false);
-    toast.success('Post updated successfully!');
     refresh();
   } catch (error) {
-    console.error('Error updating the post:', error);
-    toast.error('Error updating the post. Please try again later.');
+    console.error('Error adding a new post:', error);
   }
 };
 
+const deletePost = async (id) => {
+  try {
+    await toast.promise(
+      fetch(`${API_URI}/${id}`, {
+        method: 'DELETE',
+      }),
+      {
+        loading: 'Deleting Post...',
+        success: 'Post deleted successfully!',
+        error: 'Failed to delete the post. Please try again later.',
+      }
+    );
+
+    const updatedPosts = posts.filter((post) => post._id !== id);
+    setPosts(updatedPosts);
+  } catch (error) {
+    console.error('Error deleting a post:', error);
+  }
+};
+
+  // Inside your Blog component
+  const updatePost = async (updatedPost) => {
+    console.log(updatedPost);
+    try {
+      await toast.promise(
+        fetch(`${API_URI}/${updatedPost._id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedPost),
+        }),
+        {
+          loading: 'Updating Post...',
+          success: 'Post updated successfully!',
+          error: 'Failed to update the post. Please try again later.',
+        }
+      );
+  
+      setEditingPost(null); // Reset the editing post state
+      setIsModalOpen(false);
+      refresh();
+    } catch (error) {
+      console.error('Error updating the post:', error);
+    }
+  };
+
 const addComment = async (postId, commentText) => {
   try {
-    const response = await fetch(`${API_URI}/${postId}/comments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ text: commentText }),
-    });
+    await toast.promise(
+      fetch(`${API_URI}/${postId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: commentText }),
+      }),
+      {
+        loading: 'Adding comment...',
+        success: 'Comment added successfully!',
+        error: 'Failed to add a new comment. Please try again later.',
+      }
+    );
 
-
-    if (!response.ok) {
-      throw new Error('Failed to add a new comment');
-    }
-    toast.success('Comment added successfully!');
     refresh();
 
   } catch (error) {
     console.error('Error adding a new comment:', error);
-    toast.error('Error adding a new comment. Please try again later.');
   }
 };
 
 
-const deleteComment = async (postId, commentId) => {
+const deleteComment = async (postId, commentId, refresh) => {
   try {
-    const response = await fetch(`${API_URI}/${postId}/comments/${commentId}`, {
-      method: 'DELETE',
-    });
+    await toast.promise(
+      fetch(`${API_URI}/${postId}/comments/${commentId}`, {
+        method: 'DELETE',
+      }),
+      {
+        loading: 'Deleting Comment...',
+        success: 'Comment deleted successfully!',
+        error: 'Failed to delete the comment. Please try again later.',
+      }
+    );
 
-    if (!response.ok) {
-      throw new Error('Failed to delete the comment');
-    }
-
-    const updatedPosts = await response.json();
-    toast.error('Comment deleted successfully!');
     refresh();
   } catch (error) {
     console.error('Error deleting the comment:', error);
-    toast.error('Error deleting the comment. Please try again later.');
   }
-}
+};
+
+useEffect(() => {
+  fetchData();
+}, [change]);
 
   return (
     <>
