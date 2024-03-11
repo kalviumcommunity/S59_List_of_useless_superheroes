@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Modal from 'react-modal';
 import ModalBlog from '../components/ModalBlog';
+import ModalComment from '../components/ModalComment';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,9 +19,11 @@ function Blog() {
   const [editingPost, setEditingPost] = useState(null);
   const [postToEdit, setPostToEdit] = useState(null);
   const [change, setChange] = useState(false);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+  const [postIdComment, setPostIdComment] = useState('');
 
   const fetchData = async () => {
-    toast.info("Fetching Data.....")
+    // toast.info("Fetching Data.....")
     try {
       const response = await fetch(API_URI);
       if (!response.ok) {
@@ -129,6 +132,48 @@ const updatePost = async (updatedPost) => {
   }
 };
 
+const addComment = async (postId, commentText) => {
+  try {
+    const response = await fetch(`${API_URI}/${postId}/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text: commentText }),
+    });
+
+
+    if (!response.ok) {
+      throw new Error('Failed to add a new comment');
+    }
+    toast.success('Comment added successfully!');
+    refresh();
+
+  } catch (error) {
+    console.error('Error adding a new comment:', error);
+    toast.error('Error adding a new comment. Please try again later.');
+  }
+};
+
+
+const deleteComment = async (postId, commentId) => {
+  try {
+    const response = await fetch(`${API_URI}/${postId}/comments/${commentId}`, {
+      method: 'DELETE',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete the comment');
+    }
+
+    const updatedPosts = await response.json();
+    toast.error('Comment deleted successfully!');
+    refresh();
+  } catch (error) {
+    console.error('Error deleting the comment:', error);
+    toast.error('Error deleting the comment. Please try again later.');
+  }
+}
 
   return (
     <>
@@ -170,6 +215,43 @@ const updatePost = async (updatedPost) => {
                   <p className='text-gray-400 ml-4'>{section.point}</p>
                 </div>
               ))}
+            {/* //Comment Section  */}
+            <div className='mt-4'>
+              <div>
+              <h4 className='text-lg font-semibold text-white'>Comments:</h4>
+              <button
+                className="bg-gray-500 hover:bg-black text-white font-bold py-1 px-2 rounded mt-1"
+                onClick={() => {
+                  setPostIdComment(post._id)
+                  setIsCommentModalOpen(true)
+                }}
+              >
+                Add Comment
+              </button>
+                
+              </div>
+              {post.comments.length > 0 ?
+                post.comments.map((comment) => (
+                  <div key={comment._id} className='mt-2'>
+                    <div>
+                    <p className='text-gray-400'>{comment.text}</p>
+                    <p className='text-red-200'>{comment.createdAt}</p>
+                    </div>
+                    <button
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mt-1"
+                      onClick={() => deleteComment(post._id, comment._id)}
+                    >
+                      Delete Comment
+                    </button>
+                  </div>
+                )) : <p className='text-gray-400'>No comments yet</p>
+              }
+                </div>  
+              
+              {/* */}
+             
+                
+            {/* // */}
             </div>
           ))}
         </div>
@@ -194,6 +276,14 @@ const updatePost = async (updatedPost) => {
         editPost={editingPost}
         postToEdit = {postToEdit} // Pass the editing post
       />  
+
+      <ModalComment
+        isOpen={isCommentModalOpen}
+        closeModal={() => setIsCommentModalOpen(false)}
+        addComment={addComment}
+        postId={postIdComment}
+      />
+
      <ToastContainer />
     </>
   );
