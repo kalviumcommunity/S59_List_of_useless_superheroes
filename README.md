@@ -1,7 +1,9 @@
 # List of Useless Superheroes
 
-link : https://hero-rank.pages.dev/
----
+
+Netlify Link : https://herorank.netlify.app
+CloudFlare link : https://hero-rank.pages.dev/
+- 
 
 Welcome to the curated collection of superheroes who, in certain timelines or specific events, demonstrated a level of impracticality or perceived uselessness. The superheroes included in this list may have faced challenges where their contributions were notably limited, showcasing the diversity of their experiences within the chosen universe—be it Marvel or DC.
 
