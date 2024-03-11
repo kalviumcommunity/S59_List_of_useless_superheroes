@@ -11,7 +11,7 @@ function View({stack}) {
 // https://serverk.onrender.com/api
 // http://localhost:5000/api/
   useEffect(() => {
-    fetch(`http://localhost:5000/api/${stack.code}`)
+    fetch(`https://serverk.onrender.com/api/${stack.code}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

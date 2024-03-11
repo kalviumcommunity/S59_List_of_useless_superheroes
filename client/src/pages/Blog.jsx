@@ -12,7 +12,7 @@ Modal.setAppElement('#root');
 // http://localhost:5000/api/
 
 function Blog() {
-  const API_URI = 'http://localhost:5000/api/posts';
+  const API_URI = 'https://serverk.onrender.com/api/posts';
   const [posts, setPosts] = useState([]);
   const [visibleBodies, setVisibleBodies] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
