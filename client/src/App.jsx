@@ -6,6 +6,10 @@ import Footer from './components/Footer';
 import View from './pages/View';
 import Blog from './pages/Blog';
 import Home2 from './pages/Home2';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import LogoutPage from './pages/Logout';
+
 
 function App() {
   return (
@@ -18,6 +22,9 @@ function App() {
         <div className="flex-1">
           <Routes>
             <Route path="/" element={<Home2 />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/logout" element={<LogoutPage />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/dc" element={<View stack={{ code: 'dc' }} />} />
             <Route path="/marvel" element={<View stack={{ code: 'marvel' }} />} />
             <Route path="/comics" element={<View stack={{ code: 'comics' }} />} />

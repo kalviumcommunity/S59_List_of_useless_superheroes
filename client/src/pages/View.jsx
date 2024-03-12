@@ -6,6 +6,9 @@ import Header from './../components/Header'
 
 
 function View({stack}) {
+
+  document.getElementById('root').style.background = "black";
+
   const [heroes, setHeroes] = useState([]);
   const [loading, setLoading] = useState(true);
 // https://serverk.onrender.com/api
