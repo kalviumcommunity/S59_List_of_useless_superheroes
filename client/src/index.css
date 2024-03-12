@@ -108,3 +108,21 @@ body{
     background-color: #2980b9;
   }
   
+
+/* Hide the scrollbar */
+::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Optional: Handle Firefox scrollbar */
+/* Note: Firefox might not hide the scrollbar completely */
+/* You may need to add additional styles for Firefox */
+/* Also, Firefox supports scrollbar-width property */
+* {
+  scrollbar-width: none;
+}
+
+/* Optional: Firefox scrollbar thumb styles */
+*::-moz-scrollbar-thumb {
+  background-color: transparent;
+}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import HeroSlider, { Slide, Nav, SideNav,Overlay, MenuNav,  AutoplayButton } from "hero-slider";
 import Card from '../components/Card';
 import Header from './../components/Header'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const imgArr = [
   'https://images7.alphacoders.com/808/808611.jpg',
@@ -18,7 +18,16 @@ const imgArr = [
 
 const Home2 = () => {
 
-  
+  const [login, setLogin] = useState(false);
+
+  useEffect(()=>{
+    // const token = document.cookie.split(';').find(cookie => cookie.includes('token')).split('=')[1] || null;
+    // const userName = document.cookie.split(';').find(cookie => cookie.includes('userName')).split('=')[1] || null;
+
+    // if(token){
+    //   setLogin(true)
+    // }
+  })
 
   return (
     <>
