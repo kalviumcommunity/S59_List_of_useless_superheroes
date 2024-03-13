@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { validatePost } = require('../controllers/joi_schemas')
 const User = require('../models/userModel');
+require('dotenv').config();
 connectToDB()
 
 
@@ -181,7 +182,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
     res.status(200).json({token, userName : user.username, userId : user._id});
   } catch (error) {

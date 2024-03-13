@@ -10,8 +10,8 @@ let fieldsState={};
 
 fields.forEach(field => fieldsState[field.id]='');
 
-// const API_URI = 'https://serverk.onrender.com/api/signup';
-const API_URI = 'http://localhost:5000/api/signup';
+// const API_URI = 'https://serverk.onrender.com/auth/signup';
+const API_URI = 'http://localhost:5000/auth/signup';
 
 export default function Signup(){
   const [signupState,setSignupState]=useState(fieldsState);
@@ -73,8 +73,6 @@ export default function Signup(){
           <FormAction handleSubmit={handleSubmit} text="Signup" />
           <ToastContainer />
         </div>
-
-         
 
       </form>
     )

@@ -10,7 +10,7 @@ const fields=loginFields;
 let fieldsState = {};
 fields.forEach(field=>fieldsState[field.id]='');
 
-const API_URI = 'http://localhost:5000/api/login';
+const API_URI = 'http://localhost:5000/auth/login';
 
 export default function Login(){
     const [loginState,setLoginState]=useState(fieldsState);

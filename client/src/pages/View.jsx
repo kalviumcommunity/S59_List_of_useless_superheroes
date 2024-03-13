@@ -11,10 +11,10 @@ function View({stack}) {
 
   const [heroes, setHeroes] = useState([]);
   const [loading, setLoading] = useState(true);
-// https://serverk.onrender.com/api
-// http://localhost:5000/api/
+// https://serverk.onrender.com/content
+// http://localhost:5000/content/
   useEffect(() => {
-    fetch(`https://serverk.onrender.com/api/${stack.code}`)
+    fetch(`http://localhost:5000/content/${stack.code}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
