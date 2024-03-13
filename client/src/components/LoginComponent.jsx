@@ -5,7 +5,7 @@ import FormExtra from './FormExtra';
 import Input from './Input';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {useNavigate} from 'react-router-dom'
 const fields=loginFields;
 let fieldsState = {};
 fields.forEach(field=>fieldsState[field.id]='');
@@ -15,6 +15,7 @@ const API_URI = 'http://localhost:5000/api/login';
 export default function Login(){
     const [loginState,setLoginState]=useState(fieldsState);
     const [loading,setLoading]=useState(false);
+    const navigate = useNavigate();
 
     const handleChange=(e)=>{
         setLoginState({...loginState,[e.target.id]:e.target.value})
@@ -54,6 +55,10 @@ export default function Login(){
           if(token){
             document.cookie = `token=${token}; max-age=3600; path=/`;
             document.cookie = `userName=${userName}; max-age=3600; path=/`;
+            setTimeout (() => {
+              navigate('/');
+            }
+            , 2000);
           }
 
         } catch (error) {
