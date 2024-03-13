@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const superheroSchema = new mongoose.Schema({
+  author : {
+    type: String,
+    required: true,
+    default: "Anonymous",
+  },
   title: {
     type: String,
     required: true,

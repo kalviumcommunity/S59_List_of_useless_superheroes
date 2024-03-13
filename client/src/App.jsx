@@ -9,17 +9,14 @@ import Home2 from './pages/Home2';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import LogoutPage from './pages/Logout';
-
+import { AuthProvider } from './components/AuthContext';
 
 function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        {/* Header component */}
-        {/* <Header /> */}
-
-        {/* Main content area */}
         <div className="flex-1">
+          <AuthProvider>
           <Routes>
             <Route path="/" element={<Home2 />} />
             <Route path="/signup" element={<Signup />} />
@@ -30,9 +27,8 @@ function App() {
             <Route path="/comics" element={<View stack={{ code: 'comics' }} />} />
             <Route path="/blog" element={<Blog />} />
           </Routes>
+          </AuthProvider>
         </div>
-
-        {/* Footer component */}
         <Footer />
       </div>
     </Router>

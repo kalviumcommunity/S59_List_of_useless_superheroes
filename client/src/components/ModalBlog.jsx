@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 
-const PostModal = ({ isOpen, closeModal, onSubmit, postToEdit, editPost }) => {
+const PostModal = ({ isOpen, closeModal, onSubmit, postToEdit, editPost, user }) => {
+  console.log(user);
   const [post, setPost] = useState({
+    author: user,
     title: '',
     description: '',
     body: [{ subtitle: '', point: '' }],
   });
-
-  useEffect(() => {
-    // If postToEdit is provided, set the state with its values
-    if (postToEdit) {
-      setPost(postToEdit);
-    } else {
-      // Reset the state when the modal is opened for a new post
-      setPost({ title: '', description: '', body: [{ subtitle: '', point: '' }] });
-    }
-  }, [isOpen, postToEdit]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -51,9 +43,25 @@ const PostModal = ({ isOpen, closeModal, onSubmit, postToEdit, editPost }) => {
 
   const handleSubmit = () => {
     onSubmit(post);
-    console.log(post);
     closeModal();
   };
+
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     setPost((prevPost) => ({
+  //       ...prevPost,
+  //       Author: user,
+  //     }));
+  //   }
+  // }, [user]);
+
+  useEffect(() => {
+    if (postToEdit) {
+      setPost(postToEdit);
+    } else {
+      setPost({author: user, title: '', description: '', body: [{ subtitle: '', point: '' }] });
+    }
+  }, [isOpen, postToEdit]);
 
   return (
     <Modal isOpen={isOpen} onRequestClose={closeModal} className="modal">
@@ -76,7 +84,7 @@ const PostModal = ({ isOpen, closeModal, onSubmit, postToEdit, editPost }) => {
               placeholder="Subtitle"
             />
             <input
-            className='border-2 w-4/5 m-1 p-1'
+              className='border-2 w-4/5 m-1 p-1'
               type="text"
               value={point.point}
               onChange={(e) => handlePointChange(index, e.target.value, 'point')}
