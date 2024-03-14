@@ -54,6 +54,80 @@ router.get('/posts', async(req, res) => {
     res.send(data)
 }); 
 
+
+// post for marvel
+router.post('/marvel', authenticateToken, async (req, res) => {
+  try {
+    const newMarvel = new marvel(req.body);
+    const savedMarvel = await newMarvel.save();
+    res.status(201).send(savedMarvel);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+// POST for comic
+router.post('/comic', authenticateToken, async (req, res) => {
+  try {
+    const newComic = new comic(req.body);
+    const savedComic = await newComic.save();
+    res.status(201).send(savedComic);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// POST for dc
+router.post('/dc', authenticateToken, async (req, res) => {
+  try {
+    const newDC = new dc(req.body);
+    const savedDC = await newDC.save();
+    res.status(201).send(savedDC);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Delete for marvel
+router.delete('/marvel/:id', authenticateToken, async (req, res) => {
+  try {
+    const deletedMarvel = await marvel.findByIdAndDelete(req.params.id);
+    if (!deletedMarvel) {
+      return res.status(404).json({ error: 'Data not found' });
+    }
+    res.status(200).json({ message: 'Data deleted successfully' });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Delete for comic
+router.delete('/comic/:id', authenticateToken, async (req, res) => {
+  try {
+    const deletedComic = await comic.findByIdAndDelete(req.params.id);
+    if (!deletedComic) {
+      return res.status(404).json({ error: 'Data not found' });
+    }
+    res.status(200).json({ message: 'Data deleted successfully' });
+  }
+  catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Delete for dc
+router.delete('/dc/:id', authenticateToken, async (req, res) => {
+  try {
+    const deletedDC = await dc.findByIdAndDelete(req.params.id);
+    if (!deletedDC) {
+      return res.status(404).json({ error: 'Data not found' });
+    }
+    res.status(200).json({ message: 'Data deleted successfully' });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+);
+
 router.post('/posts', authenticateToken,  async (req, res) => {
     try {
         // validate the request body -{POST}

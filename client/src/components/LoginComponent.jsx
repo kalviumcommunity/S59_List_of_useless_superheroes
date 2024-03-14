@@ -6,6 +6,8 @@ import Input from './Input';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from 'react-router-dom'
+import {InfinitySpin} from 'react-loader-spinner'
+
 const fields=loginFields;
 let fieldsState = {};
 fields.forEach(field=>fieldsState[field.id]='');
@@ -56,7 +58,7 @@ export default function Login(){
             document.cookie = `token=${token}; max-age=3600; path=/`;
             document.cookie = `userName=${userName}; max-age=3600; path=/`;
             setTimeout (() => {
-              navigate('/');
+              window.location.href = '/';
             }
             , 2000);
           }
@@ -72,6 +74,7 @@ export default function Login(){
 
     return(
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          
         <div className="-space-y-px">
             {
                 fields.map(field=>
@@ -93,7 +96,16 @@ export default function Login(){
         </div>
 
         <FormExtra/>
-        <FormAction handleSubmit={handleSubmit} text="Login"/>
+        
+        
+        
+        {loading ? <InfinitySpin
+          visible={true}
+          width="200"
+          color="#9333EA"
+          ariaLabel="infinity-spin-loading"
+        /> : <FormAction handleSubmit={handleSubmit} text="Login"/> }
+
         <ToastContainer />
       </form>
     )
