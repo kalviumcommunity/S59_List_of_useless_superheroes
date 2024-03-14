@@ -38,6 +38,10 @@ const marvelSchema = new Schema({
       },
       'Most Useless Moment': {
         type: String,
+      },
+      'created_by': {
+        type: String,
+        default: 'Admin'
       }
 })
 
