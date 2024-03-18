@@ -84,21 +84,30 @@ router.get(
   "/login/success", isLoggedIn,
   (req, res) => {
     if (req.user) {
+      const userNameCookieOptions = {
+        maxAge: 900000, // Adjust maxAge as needed
+        domain: '.netlify.app' // Specify the correct domain
+      };
 
-      res.cookie('userName', (req.user.name.givenName), { maxAge: 900000}); // Adjust maxAge as needed
-      
+      res.cookie('userName', req.user.name.givenName, userNameCookieOptions);
+
       req.session.user = req.user;
 
       const token = jwt.sign({ userId: req.user.id }, process.env.SECRET_KEY, {
         expiresIn: "1h",
-      })
-      
-      res.cookie('token', (token), { maxAge: 900000}); // Adjust maxAge as needed
+      });
 
-      // res.send(req.user);
+      const tokenCookieOptions = {
+        maxAge: 900000, // Adjust maxAge as needed
+        domain: '.netlify.app' // Specify the correct domain
+      };
 
+      res.cookie('token', token, tokenCookieOptions);
+
+      // Debugging
       console.log(req.user);
-      // LOCALHOST OR DEPLOYED LINK
+
+      // Redirect to the frontend application
       res.redirect('https://herorank.netlify.app/');
     } else {
       res.status(401).json({
@@ -109,6 +118,7 @@ router.get(
   }
 );
 
+
 // google Oauth get
 
 
@@ -116,7 +126,6 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/auth/login/failed" }),
   function (req, res) {
-    // Successful authentication, redirect home.
     res.redirect("/auth/login/success");
   }
   );
