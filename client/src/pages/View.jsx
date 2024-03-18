@@ -32,7 +32,7 @@ function View({ stack }) {
   // https://serverk.onrender.com/content
   // http://localhost:5000/content/
   useEffect(() => {
-    fetch(`http://localhost:5000/content/${stack.code}`)
+    fetch(`https://serverk.onrender.com/content/${stack.code}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -62,7 +62,7 @@ function View({ stack }) {
       );
       const data = await response.json();
       console.log(data);
-      // toast.success('Card deleted successfully');
+      toast.success('Card deleted successfully');
     } catch (error) {
       // console.error(error);
       toast.error(error.message || "failed to delete card");

@@ -14,7 +14,7 @@ Modal.setAppElement('#root');
 // http://localhost:5000/content/
 
 function Blog() {
-  const API_URI = 'http://localhost:5000/content/posts';
+  const API_URI = 'https://serverk.onrender.com/content/posts';
   const [posts, setPosts] = useState([]);
   const [visibleBodies, setVisibleBodies] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -239,7 +239,7 @@ useEffect(() => {
               >
                 {visibleBodies[post._id] ? 'Hide Body' : 'Show Body'}
               </button>
-              <button
+              {token && <button
                 className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 mx-2 rounded mt-2"
                 onClick={() => {
                   setEditingPost(true)
@@ -248,13 +248,13 @@ useEffect(() => {
                 }}
               >
                 Update Post
-              </button>
-              <button
+              </button>}
+              {token && <button
                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded mt-2"
                 onClick={() => deletePost(post._id)}
               >
                 Delete Post
-              </button>
+              </button>}
               {visibleBodies[post._id] && post.body.map((section) => (
                 <div key={section.subtitle} className='mt-2'>
                   <h4 className='text-lg font-semibold text-white'>{section.subtitle}</h4>

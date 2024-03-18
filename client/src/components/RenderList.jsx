@@ -54,9 +54,9 @@ const RenderCard = ({ hero, deleteCard }) => {
             <Button variant="contained" color="primary" onClick={openModal}>
               View Details
             </Button>
-            {token && <Button variant="outlined" color="error" onClick={()=>{deleteCard(hero._id, token);{console.log(hero._id)}}}>
+            {/* {token && <Button variant="outlined" color="error" onClick={()=>{deleteCard(hero._id, token);{console.log(hero._id)}}}>
               Delete
-            </Button>}
+            </Button>} */}
             </div>
           </CardContent>
         </Card>

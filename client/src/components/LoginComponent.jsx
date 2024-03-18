@@ -7,12 +7,15 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from 'react-router-dom'
 import {InfinitySpin} from 'react-loader-spinner'
+import GoogleButton from 'react-google-button'
 
 const fields=loginFields;
 let fieldsState = {};
 fields.forEach(field=>fieldsState[field.id]='');
 
-const API_URI = 'http://localhost:5000/auth/login';
+
+
+const API_URI = 'https://serverk.onrender.com/auth/login';
 
 export default function Login(){
     const [loginState,setLoginState]=useState(fieldsState);
@@ -58,6 +61,7 @@ export default function Login(){
             document.cookie = `token=${token}; max-age=3600; path=/`;
             document.cookie = `userName=${userName}; max-age=3600; path=/`;
             setTimeout (() => {
+              setLoading(false)
               window.location.href = '/';
             }
             , 2000);
@@ -67,10 +71,13 @@ export default function Login(){
           console.error('Authentication error:', error);
           toast.error(error.message || 'An unexpected error occurred during authentication');
         } finally {
-          setLoading(false);
+          // setLoading(false);
         }
       };
     
+    const googleAuth=()=>{
+      window.open('https://serverk.onrender.com/auth/google/callback',"_self")
+    }
 
     return(
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -99,12 +106,18 @@ export default function Login(){
         
         
         
-        {loading ? <InfinitySpin
+        {loading ? <div className='flex justify-center items-center'>
+          <InfinitySpin
           visible={true}
           width="200"
           color="#9333EA"
           ariaLabel="infinity-spin-loading"
-        /> : <FormAction handleSubmit={handleSubmit} text="Login"/> }
+        />
+        </div> : <FormAction handleSubmit={handleSubmit} text="Login"/> }
+        <br />
+        <div className='flex justify-center items-center'>
+          <GoogleButton onClick={googleAuth}/>
+        </div>
 
         <ToastContainer />
       </form>

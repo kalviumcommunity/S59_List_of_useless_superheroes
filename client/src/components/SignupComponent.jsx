@@ -4,14 +4,15 @@ import FormAction from './FormAction';
 import Input from './Input';
 import { toast, ToastContainer  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import GoogleButton from 'react-google-button';
 
 const fields=signupFields;
 let fieldsState={};
 
 fields.forEach(field => fieldsState[field.id]='');
 
-// const API_URI = 'https://serverk.onrender.com/auth/signup';
-const API_URI = 'http://localhost:5000/auth/signup';
+const API_URI = 'https://serverk.onrender.com/auth/signup';
+// const API_URI = 'http://localhost:5000/auth/signup';
 
 export default function Signup(){
   const [signupState,setSignupState]=useState(fieldsState);
@@ -49,6 +50,9 @@ export default function Signup(){
     }
   };
   
+  const googleAuth=()=>{
+    window.open('https://serverk.onrender.com/auth/google/callback',"_self")
+  }
 
     return(
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -72,6 +76,10 @@ export default function Signup(){
             }
           <FormAction handleSubmit={handleSubmit} text="Signup" />
           <ToastContainer />
+        </div>
+
+        <div className='flex justify-center items-center'>
+          <GoogleButton onClick={googleAuth}/>
         </div>
 
       </form>

@@ -21,6 +21,11 @@ const Header = () => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(auth);
+  }, [auth]);
+
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
