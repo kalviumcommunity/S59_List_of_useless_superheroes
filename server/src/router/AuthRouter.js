@@ -86,7 +86,7 @@ router.get(
     if (req.user) {
       const userNameCookieOptions = {
         maxAge: 900000, // Adjust maxAge as needed
-        domain: '.netlify.app' // Specify the correct domain
+        domain: 'herorank.netlify.app' // Specify the correct domain
       };
 
       res.cookie('userName', req.user.name.givenName, userNameCookieOptions);
@@ -99,7 +99,7 @@ router.get(
 
       const tokenCookieOptions = {
         maxAge: 900000, // Adjust maxAge as needed
-        domain: '.netlify.app' // Specify the correct domain
+        domain: 'herorank.netlify.app' // Specify the correct domain
       };
 
       res.cookie('token', token, tokenCookieOptions);
