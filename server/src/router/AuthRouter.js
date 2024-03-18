@@ -108,7 +108,7 @@ router.get(
       console.log(req.user);
 
       // Redirect to the frontend application
-      res.redirect('https://herorank.netlify.app/');
+      res.redirect('https://herorank.netlify.app/login/google/success');
     } else {
       res.status(401).json({
         error: true,
