@@ -6,7 +6,7 @@ const contentRoute = require("./src/router/ContentRouter");
 const cors = require("cors");
 const app = express();
 const passport = require("passport");
-const session = require("cookie-session");
+const session = require("express-session");
 const authGoogle = require("./src/G_Oauth/passport");
 const cookieParser = require("cookie-parser");
 
