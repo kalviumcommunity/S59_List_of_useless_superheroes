@@ -77,7 +77,7 @@ export default function Login(){
     
     const googleAuth=()=>{
       window.open('https://serverk.onrender.com/auth/google/callback',
-      // "_self"
+      "_self"
       )
     }
 
