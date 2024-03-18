@@ -86,10 +86,10 @@ router.get(
     if (req.user) {
       // Set user name cookie
       res.cookie('userName', req.user.name.givenName, {
-        maxAge: 900000, // Adjust maxAge as needed
-        domain: 'herorank.netlify.app', // Specify the correct domain
-        httpOnly: true, // This ensures that the cookie is only accessible through HTTP requests
-        secure: true // This ensures that the cookie is only sent over HTTPS connections
+        maxAge: 900000, 
+        domain: 'herorank.netlify.app', 
+        httpOnly: false,
+        secure: false 
       });
 
       // Set token cookie
@@ -98,10 +98,10 @@ router.get(
       });
 
       res.cookie('token', token, {
-        maxAge: 900000, // Adjust maxAge as needed
-        domain: 'herorank.netlify.app', // Specify the correct domain
-        httpOnly: true, // This ensures that the cookie is only accessible through HTTP requests
-        secure: true // This ensures that the cookie is only sent over HTTPS connections
+        maxAge: 900000, 
+        domain: 'herorank.netlify.app',
+        httpOnly: false,
+        secure: false 
       });
 
       // Debugging
