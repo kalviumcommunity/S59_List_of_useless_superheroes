@@ -84,25 +84,25 @@ router.get(
   "/login/success", isLoggedIn,
   (req, res) => {
     if (req.user) {
-      const userNameCookieOptions = {
+      // Set user name cookie
+      res.cookie('userName', req.user.name.givenName, {
         maxAge: 900000, // Adjust maxAge as needed
-        domain: 'herorank.netlify.app' // Specify the correct domain
-      };
+        domain: 'herorank.netlify.app', // Specify the correct domain
+        httpOnly: true, // This ensures that the cookie is only accessible through HTTP requests
+        secure: true // This ensures that the cookie is only sent over HTTPS connections
+      });
 
-      res.cookie('userName', req.user.name.givenName, userNameCookieOptions);
-
-      req.session.user = req.user;
-
+      // Set token cookie
       const token = jwt.sign({ userId: req.user.id }, process.env.SECRET_KEY, {
         expiresIn: "1h",
       });
 
-      const tokenCookieOptions = {
+      res.cookie('token', token, {
         maxAge: 900000, // Adjust maxAge as needed
-        domain: 'herorank.netlify.app' // Specify the correct domain
-      };
-
-      res.cookie('token', token, tokenCookieOptions);
+        domain: 'herorank.netlify.app', // Specify the correct domain
+        httpOnly: true, // This ensures that the cookie is only accessible through HTTP requests
+        secure: true // This ensures that the cookie is only sent over HTTPS connections
+      });
 
       // Debugging
       console.log(req.user);
@@ -117,6 +117,7 @@ router.get(
     }
   }
 );
+
 
 
 // google Oauth get
