@@ -8,11 +8,11 @@ const app = express();
 const passport = require("passport");
 const session = require("express-session");
 const authGoogle = require("./src/G_Oauth/passport");
-
+const cookieParser = require("cookie-parser");
 
 
 app.set('trust proxy', 1) // trust first proxy
-app.use(express.cookieParser(process.env.SESSION_SECRET));
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
