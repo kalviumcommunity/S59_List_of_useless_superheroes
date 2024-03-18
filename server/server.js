@@ -14,7 +14,7 @@ const cookieParser = require("cookie-parser");
 app.set('trust proxy', 1) // trust first proxy
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'secret',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }
