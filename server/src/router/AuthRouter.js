@@ -116,7 +116,7 @@ router.get(
 
 
       // Debugging
-      console.log(req.user);
+      // console.log(req.user);
 
       // Redirect to the frontend application
       res.redirect('https://herorank.netlify.app/login/oauth/success');
