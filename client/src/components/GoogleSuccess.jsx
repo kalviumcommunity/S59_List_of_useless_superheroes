@@ -36,13 +36,13 @@ const fetchSessionUser = async() => {
 }
 
 useEffect(() => {
-  // console.log(user, token)
+  console.log(user, token)
 
   if(user && token){
     document.cookie = `token=${token}; max-age=3600; path=/`;
     document.cookie = `userName=${user}; max-age=3600; path=/`;
     setTimeout(() => {
-      navigate('/')
+      window.location.href = '/';
     }, 2000)
   }
 
