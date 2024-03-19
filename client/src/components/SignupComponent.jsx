@@ -51,7 +51,8 @@ export default function Signup(){
   };
   
   const googleAuth=()=>{
-    window.open('https://serverk.onrender.com/auth/google/callback',"_self")
+    // window.open('https://serverk.onrender.com/auth/google/callback',"_self")
+    window.open('http://localhost:5000/auth/google/callback',"_self")
   }
 
     return(

@@ -29,8 +29,8 @@ function View({ stack }) {
     setSelectedCreator(event.target.value);
   };
 
-  // https://serverk.onrender.com/content
-  // http://localhost:5000/content/
+  const API_URI = `https://serverk.onrender.com/content/${stack.code}`
+  //  const API_URI = `http://localhost:5000/content/${stack.code}`
   useEffect(() => {
     fetch(`https://serverk.onrender.com/content/${stack.code}`)
       .then((res) => res.json())
@@ -51,7 +51,7 @@ function View({ stack }) {
   const deleteCard = async (id, token) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/content/${stack.code}/${id}`,
+        `${API_URI}/${id}`,
         {
           method: "DELETE",
           headers: {

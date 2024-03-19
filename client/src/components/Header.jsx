@@ -9,6 +9,26 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/auth/login/success");
+        if (response.ok) {
+          const { userName, token } = await response.json();
+          localStorage.setItem("userName", userName);
+          localStorage.setItem("token", token);
+          setUserName(userName);
+          setAuth(true);
+        } else {
+          // Handle error
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }})
+
+
+  useEffect(() => {
     const cookies = document.cookie.split(";");
     const userNameCookie = cookies.find((cookie) =>
       cookie.trim().startsWith("userName=")

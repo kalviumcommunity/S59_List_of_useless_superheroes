@@ -23,7 +23,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/logout" element={<LogoutPage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/login/google/success" element={<GoogleSuccess />} />
+            <Route path="/login/oauth/success" element={<GoogleSuccess />} />
             <Route path="/dc" element={<View stack={{ code: 'dc' }} />} />
             <Route path="/marvel" element={<View stack={{ code: 'marvel' }} />} />
             <Route path="/comics" element={<View stack={{ code: 'comics' }} />} />

@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 require("dotenv").config();
 const passport = require("passport");
+const SessionUser = require("../models/oauth");
 
 // 
 function isLoggedIn(req, res, next) {
@@ -82,33 +83,44 @@ router.get(
 
 router.get(
   "/login/success", isLoggedIn,
-  (req, res) => {
+  async (req, res) => {
     if (req.user) {
       // Set user name cookie
-      res.cookie('userName', req.user.name.givenName, {
-        maxAge: 900000, 
-        domain: 'herorank.netlify.app', 
-        httpOnly: false,
-        secure: false 
-      });
+      // res.cookie('userName', req.user.name.givenName, {
+      //   maxAge: 900000, 
+      //   httpOnly: false,
+      //   secure: false 
+      // });
 
       // Set token cookie
       const token = jwt.sign({ userId: req.user.id }, process.env.SECRET_KEY, {
         expiresIn: "1h",
       });
 
-      res.cookie('token', token, {
-        maxAge: 900000, 
-        domain: 'herorank.netlify.app',
-        httpOnly: false,
-        secure: false 
+      // res.cookie('token', token, {
+      //   maxAge: 900000, 
+      //   httpOnly: false,
+      //   secure: false 
+      // });
+
+      // delete current user
+      const currentUser = await SessionUser.findOneAndDelete({ label: 'current' });
+
+      // Save user to the database
+      const sessionUser = new SessionUser({
+        userName: req.user.name.givenName,
+        token: token,
       });
+
+      await sessionUser.save();
+
 
       // Debugging
       console.log(req.user);
 
       // Redirect to the frontend application
-      res.redirect('https://herorank.netlify.app/');
+      res.redirect('https://herorank.netlify.app/login/oauth/success');
+      // res.redirect('http://localhost:5173/login/oauth/success');
     } else {
       res.status(401).json({
         error: true,
@@ -136,4 +148,23 @@ router.get(
     passport.authenticate("google", { scope: ['email', 'profile'] })
   );
   
+// fetch find and delete user
+router.get("/login/success/user", async (req, res) => {
+  try {
+    // Fetch the current user
+    const currentUser = await SessionUser.findOne({ label: 'current' });
+
+    if (!currentUser) {
+      return res.status(404).json({ message: 'No current user found' });
+    }
+
+    // Send the current user data in the response
+    res.json(currentUser);
+  } catch (error) {
+    console.error('Error fetching and deleting current user:', error);
+    res.status(500).json({ error: true, message: 'Internal Server Error' });
+  }
+});
+
+
 module.exports = router;

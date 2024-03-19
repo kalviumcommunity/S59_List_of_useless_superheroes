@@ -15,7 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddCard = ({code, refresh, token}) => {
 
-    const API_URI = `http://localhost:5000/content/${code}`;
+    // const API_URI = `http://localhost:5000/content/${code}`;
+    const API_URI = `https://serverk.onrender.com/content/${code}`;
    
     const [user, setUser] = useState('Anonymous');
     const [modalOpen, setModalOpen] = useState(false);
