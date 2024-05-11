@@ -34,6 +34,11 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 app.use("/content", contentRoute);
+
+app.get('/ping',(req,res)=>{
+  res.send('pong')
+})
+
 // app.use('/api', routes);
 
 app.listen(port, () => {
